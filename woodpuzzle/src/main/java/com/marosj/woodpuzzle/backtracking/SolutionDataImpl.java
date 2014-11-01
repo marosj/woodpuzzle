@@ -20,16 +20,16 @@ package com.marosj.woodpuzzle.backtracking;
  *
  * @author marosj
  */
-public interface SolutionData {
-    
-    /**
-     * @return new instance of SolutionData containing also piecePos
-     */
-    SolutionData addPiecePosition(PiecePosition piecePos);
-    
-    /**
-     * @return how many positions(pieces) were already added
-     */
-    int positionsCount();
+class SolutionDataImpl implements SolutionData{
+
+    @Override
+    public SolutionData addPiecePosition(PiecePosition piecePos) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public int positionsCount() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

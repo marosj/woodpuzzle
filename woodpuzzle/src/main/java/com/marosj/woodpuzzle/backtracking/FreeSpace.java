@@ -20,16 +20,17 @@ package com.marosj.woodpuzzle.backtracking;
  *
  * @author marosj
  */
-public interface SolutionData {
+public interface FreeSpace extends PiecePosition{
+
+    /**
+     * @return true if "another" can be added to free space
+     */
+    boolean canAdd(PiecePosition anoher);
     
     /**
-     * @return new instance of SolutionData containing also piecePos
+     * @return new instance of FreeSapce, where "another"
+     *  PiecePosition is added
      */
-    SolutionData addPiecePosition(PiecePosition piecePos);
-    
-    /**
-     * @return how many positions(pieces) were already added
-     */
-    int positionsCount();
+    FreeSpace add(PiecePosition another);
     
 }

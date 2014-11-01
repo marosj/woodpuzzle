@@ -16,10 +16,15 @@
  */
 package com.marosj.woodpuzzle.backtracking;
 
+import java.util.Collection;
+
 /**
  *
  * @author marosj
  */
 public interface ProblemData {
     
+    FreeSpace freeSpace();
+    
+    Collection<Piece> availablePieces();
 }

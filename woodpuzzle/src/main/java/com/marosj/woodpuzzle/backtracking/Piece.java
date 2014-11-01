@@ -16,20 +16,16 @@
  */
 package com.marosj.woodpuzzle.backtracking;
 
+import java.util.Collection;
+
 /**
  *
  * @author marosj
  */
-public interface SolutionData {
+public interface Piece {
     
-    /**
-     * @return new instance of SolutionData containing also piecePos
-     */
-    SolutionData addPiecePosition(PiecePosition piecePos);
+    String name();
     
-    /**
-     * @return how many positions(pieces) were already added
-     */
-    int positionsCount();
+    Collection<PiecePosition> availablePositions();
     
 }
