@@ -34,7 +34,7 @@ public class PiecePositionListImpl implements PiecePosition {
     private final Position[] positions;
 
     public PiecePositionListImpl(Position[] positions) {
-        if (positions == null || positions.length == 0) {
+        if (positions == null) {
             throw new IllegalArgumentException("No positions to create PiecePosition.");
         }
         Arrays.sort(positions, comparator);
@@ -52,8 +52,7 @@ public class PiecePositionListImpl implements PiecePosition {
             PiecePositionListImpl anotherCast = (PiecePositionListImpl) another;
             if (this.positions.length <= anotherCast.positions.length) {
                 for (Position position : positions) {
-                    int foundIdx = Arrays.binarySearch(anotherCast.positions, position, comparator);
-                    if (foundIdx >= 0) {
+                    if (another.intersect(position)) {
                         return true;
                     }
                 }
@@ -64,6 +63,39 @@ public class PiecePositionListImpl implements PiecePosition {
         } else {
             return false;
         }
+    }
+
+    @Override
+    public boolean intersect(Position pos) {
+        int foundIdx = Arrays.binarySearch(positions, pos, comparator);
+        return foundIdx >= 0;
+    }
+
+    @Override
+    public String toString() {
+        return "PiecePositionListImpl{" + "positions=" + Arrays.toString(positions) + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 73 * hash + Arrays.deepHashCode(this.positions);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final PiecePositionListImpl other = (PiecePositionListImpl) obj;
+        if (!Arrays.deepEquals(this.positions, other.positions)) {
+            return false;
+        }
+        return true;
     }
 
     private static class PositionComparator implements Comparator<Position> {

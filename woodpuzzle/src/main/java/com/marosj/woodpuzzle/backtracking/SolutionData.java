@@ -16,20 +16,22 @@
  */
 package com.marosj.woodpuzzle.backtracking;
 
+import java.util.List;
+import javax.annotation.concurrent.Immutable;
+
 /**
  *
  * @author marosj
  */
+@Immutable
 public interface SolutionData {
     
     /**
      * @return new instance of SolutionData containing also piecePos
      */
-    SolutionData addPiecePosition(PiecePosition piecePos);
+    SolutionData addPiece(Piece piece, PiecePosition piecePos);
+
+    List<Piece> pieces();
     
-    /**
-     * @return how many positions(pieces) were already added
-     */
-    int positionsCount();
-    
+    List<PiecePosition> positions();
 }

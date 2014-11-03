@@ -16,9 +16,12 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 // </editor-fold>
-package com.marosj.woodpuzzle.backtracking;
+package com.marosj.woodpuzzle.backtracking.lists;
 
+import com.marosj.woodpuzzle.backtracking.Piece;
+import com.marosj.woodpuzzle.backtracking.PiecePosition;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.concurrent.Immutable;
@@ -28,41 +31,30 @@ import javax.annotation.concurrent.Immutable;
  * @author marosj
  */
 @Immutable
-class SolutionDataImpl implements SolutionData{
+public class PieceImpl implements Piece {
 
-    private final List<Piece> pieces = new ArrayList<>();
+    private final String name;
     private final List<PiecePosition> positions = new ArrayList<>();
 
-    public SolutionDataImpl() {
-    }
-    
-    private SolutionDataImpl(List<Piece> pieces, List<PiecePosition> positions) {
-        this.pieces.addAll(pieces);
+    public PieceImpl(String name, List<PiecePosition> positions) {
+        this.name = name;
         this.positions.addAll(positions);
     }
     
     @Override
-    public SolutionData addPiece(Piece piece, PiecePosition piecePos) {
-        List<PiecePosition> newPositions = new ArrayList<>(positions);
-        newPositions.add(piecePos);
-        List<Piece> newPieces = new ArrayList<>(this.pieces);
-        newPieces.add(piece);
-        return new SolutionDataImpl(newPieces, newPositions);
+    public String name() {
+        return name;
     }
 
     @Override
-    public List<Piece> pieces() {
-        return Collections.unmodifiableList(pieces);
-    }
-
-    @Override
-    public List<PiecePosition> positions() {
+    public Collection<PiecePosition> availablePositions() {
         return Collections.unmodifiableList(positions);
     }
 
     @Override
     public String toString() {
-        return "SolutionDataImpl{" + "pieces=" + pieces + ", positions=" + positions + '}';
+        return "Piece{" + "name=" + name + '}';
     }
-
+    
+    
 }

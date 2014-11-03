@@ -46,12 +46,13 @@ public class Solver {
             for (PiecePosition position : piece.availablePositions()) {
                 if (space.canAdd(position)) {
                     LOGGER.debug("Adding position {}", position);
-                    SolutionData newSolution = solve(availablePieces, space.add(position), partialSolution.addPiecePosition(position));
+                    SolutionData newSolution = solve(availablePieces, space.add(position), partialSolution.addPiece(piece, position));
                     if (newSolution != null) {
                         return newSolution;
                     }
                 }
             }
+            LOGGER.debug("Backtracking from piece {}", piece);
             availablePieces.previous(); //backtrack
             return null;
         }

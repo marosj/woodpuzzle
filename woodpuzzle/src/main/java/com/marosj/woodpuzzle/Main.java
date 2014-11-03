@@ -14,20 +14,21 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.marosj.woodpuzzle.backtracking;
+package com.marosj.woodpuzzle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
  * @author marosj
  */
-public interface PiecePosition {
+public class Main {
 
-    Position[] positions();
+    private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
     
-    /**
-     * @return true if at least one position is in both PiecePositions
-     */
-    boolean intersect(PiecePosition another);
-    
-    boolean intersect(Position pos);
+    public static void main(String[] args) {
+        LOGGER.debug("Started");
+        LOGGER.debug("Ended");
+    }
 }

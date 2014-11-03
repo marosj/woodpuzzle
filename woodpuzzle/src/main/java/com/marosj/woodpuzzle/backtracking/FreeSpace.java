@@ -25,7 +25,7 @@ public interface FreeSpace extends PiecePosition{
     /**
      * @return true if "another" can be added to free space
      */
-    boolean canAdd(PiecePosition anoher);
+    boolean canAdd(PiecePosition another);
     
     /**
      * @return new instance of FreeSapce, where "another"

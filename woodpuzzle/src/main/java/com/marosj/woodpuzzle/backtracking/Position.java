@@ -26,25 +26,25 @@ import javax.annotation.concurrent.Immutable;
 @Immutable
 public class Position {
 
-    private final byte level;
-    private final byte row;
-    private final byte column;
+    private final int level;
+    private final int row;
+    private final int column;
 
-    public Position(byte level, byte row, byte column) {
+    public Position(int level, int row, int column) {
         this.level = level;
         this.row = row;
         this.column = column;
     }
     
-    public byte getLevel() {
+    public int getLevel() {
         return level;
     }
 
-    public byte getRow() {
+    public int getRow() {
         return row;
     }
 
-    public byte getColumn() {
+    public int getColumn() {
         return column;
     }
 

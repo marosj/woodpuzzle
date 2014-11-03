@@ -19,6 +19,7 @@ package com.marosj.woodpuzzle.backtracking.lists;
 import com.marosj.woodpuzzle.backtracking.PiecePosition;
 import com.marosj.woodpuzzle.backtracking.Position;
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
@@ -29,19 +30,19 @@ import org.junit.Test;
  */
 public class PiecePositionListImplTest {
 
-    private final Position p1 = new Position((byte) 0, (byte) 0, (byte) 0);
-    private final Position p2 = new Position((byte) 0, (byte) 0, (byte) 1);
-    private final Position p3 = new Position((byte) 0, (byte) 0, (byte) -1);
-    
-    private final Position p4 = new Position((byte) -1, (byte) 1, (byte) 0);
-    private final Position p5 = new Position((byte) -1, (byte) 0, (byte) 0);
-    
-    private final Position p6 = new Position((byte) 1, (byte) -1, (byte) 0);
-    private final Position p7 = new Position((byte) 1, (byte) 0, (byte) 1);
+    private final Position p1 = new Position(0, 0, 0);
+    private final Position p2 = new Position(0, 0, 1);
+    private final Position p3 = new Position(0, 0, -1);
+
+    private final Position p4 = new Position(-1, 1, 0);
+    private final Position p5 = new Position(-1, 0, 0);
+
+    private final Position p6 = new Position(1, -1, 0);
+    private final Position p7 = new Position(1, 0, 1);
 
     @Test
     public void testPositions() {
-        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[] {p1, p2, p3, p4, p5, p6, p7});
+        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[]{p1, p2, p3, p4, p5, p6, p7});
         Position[] expResult = {p5, p4, p3, p1, p2, p6, p7};
         Position[] result = instance.positions();
         assertArrayEquals(expResult, result);
@@ -49,8 +50,8 @@ public class PiecePositionListImplTest {
 
     @Test
     public void testIntersect() {
-        PiecePosition another = new PiecePositionListImpl(new Position[] {p6});
-        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[] {p1, p2, p3, p4, p5, p6, p7});
+        PiecePosition another = new PiecePositionListImpl(new Position[]{p6});
+        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[]{p1, p2, p3, p4, p5, p6, p7});
         assertTrue(instance.intersect(instance));
         assertTrue(instance.intersect(another));
         assertTrue(another.intersect(instance));
@@ -58,9 +59,9 @@ public class PiecePositionListImplTest {
 
     @Test
     public void testIntersect2() {
-        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[] {p1, p2, p3, p4, p5, p6, p7});
+        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[]{p1, p2, p3, p4, p5, p6, p7});
         for (Position position : instance.positions()) {
-            PiecePositionListImpl another = new PiecePositionListImpl(new Position[] {position});
+            PiecePositionListImpl another = new PiecePositionListImpl(new Position[]{position});
             assertTrue(another.intersect(instance));
             assertTrue(instance.intersect(another));
         }
@@ -68,10 +69,18 @@ public class PiecePositionListImplTest {
 
     @Test
     public void testIntersect3() {
-        PiecePosition another = new PiecePositionListImpl(new Position[] {new Position((byte) 2, (byte)0, (byte)0)});
-        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[] {p1, p2, p3, p4, p5, p6, p7});
+        PiecePosition another = new PiecePositionListImpl(new Position[]{new Position(2, 0, 0)});
+        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[]{p1, p2, p3, p4, p5, p6, p7});
         assertFalse(instance.intersect(another));
         assertFalse(another.intersect(instance));
     }
-    
+
+    @Test
+    public void testEquals() {
+        PiecePositionListImpl instance = new PiecePositionListImpl(new Position[]{p1, p2, p3, p4, p5, p6, p7});
+        PiecePositionListImpl instance2 = new PiecePositionListImpl(new Position[]{p1, p7, p4, p3, p5, p6, p2});
+
+        assertEquals(instance, instance2);
+    }
+
 }

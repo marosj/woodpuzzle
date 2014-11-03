@@ -17,14 +17,30 @@
 package com.marosj.woodpuzzle.backtracking;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import javax.annotation.concurrent.Immutable;
 
 /**
  *
  * @author marosj
  */
-public interface ProblemData {
+@Immutable
+public class ProblemData {
     
-    FreeSpace freeSpace();
+    private final FreeSpace space;
+    private final List<Piece> pieces;
+
+    public ProblemData(FreeSpace space, List<Piece> pieces) {
+        this.space = space;
+        this.pieces = pieces;
+    }
     
-    Collection<Piece> availablePieces();
+    public FreeSpace freeSpace() {
+        return space;
+    }
+    
+    public Collection<Piece> availablePieces() {
+        return Collections.unmodifiableList(pieces);
+    }
 }
