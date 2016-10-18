@@ -16,10 +16,11 @@
  */
 package com.marosj.woodpuzzle.backtracking;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.ListIterator;
 
 /**
  * Runs backtracking solving algorithm.
@@ -27,15 +28,15 @@ import org.slf4j.LoggerFactory;
  * @author marosj
  */
 public class Solver {
-    
+
     private static final Logger LOGGER = LoggerFactory.getLogger(Solver.class);
-    
+
     public SolutionData solve(ProblemData problem) {
         SolutionData emptySolution = new SolutionDataImpl();
         ListIterator<Piece> pieceIt = new ArrayList<>(problem.availablePieces()).listIterator();
         return solve(pieceIt, problem.freeSpace(), emptySolution);
     }
-    
+
     private SolutionData solve(ListIterator<Piece> availablePieces, FreeSpace space, SolutionData partialSolution) {
         if (!availablePieces.hasNext()) {
             LOGGER.info("No more pieces to add - solution found: {}", partialSolution);
