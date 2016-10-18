@@ -44,7 +44,7 @@ public class PieceBuilder {
     }
     
     public PieceBuilder addPosition() {
-        piecePositions.add(new PiecePositionListImpl(positions.toArray(new Position[0])));
+        piecePositions.add(new PiecePositionListImpl(positions.toArray(new Position[positions.size()])));
         positions.clear();
         return this;
     }
