@@ -16,6 +16,10 @@
  */
 package com.marosj.woodpuzzle;
 
+import com.marosj.woodpuzzle.backtracking.Piece;
+import com.marosj.woodpuzzle.backtracking.PiecePosition;
+import com.marosj.woodpuzzle.backtracking.SolutionData;
+import com.marosj.woodpuzzle.backtracking.Solver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,6 +33,15 @@ public class Main {
     
     public static void main(String[] args) {
         LOGGER.debug("Started");
+        Cube cube = new Cube();
+        LOGGER.debug("Cube problem generated.");
+        SolutionData solutionData =new Solver().solve(cube.toProblemData());
+        int i = 0;
+        for (Piece piece : solutionData.pieces()) {
+            PiecePosition position = solutionData.positions().get(i);
+            LOGGER.info("Piece: {} has position: {}", piece.name(), position);
+            i++;
+        }
         LOGGER.debug("Ended");
     }
 }
