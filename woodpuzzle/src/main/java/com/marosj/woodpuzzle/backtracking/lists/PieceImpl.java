@@ -20,11 +20,9 @@ package com.marosj.woodpuzzle.backtracking.lists;
 
 import com.marosj.woodpuzzle.backtracking.Piece;
 import com.marosj.woodpuzzle.backtracking.PiecePosition;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+
 import javax.annotation.concurrent.Immutable;
+import java.util.*;
 
 /**
  *
@@ -52,8 +50,22 @@ public class PieceImpl implements Piece {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof PieceImpl)) return false;
+        PieceImpl piece = (PieceImpl) o;
+        return Objects.equals(name, piece.name) &&
+                Objects.equals(positions, piece.positions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, positions);
+    }
+
+    @Override
     public String toString() {
-        return "Piece{" + "name=" + name + '}';
+        return "Piece{" + "name=" + name + ",availablePositions=" + positions + '}';
     }
     
     

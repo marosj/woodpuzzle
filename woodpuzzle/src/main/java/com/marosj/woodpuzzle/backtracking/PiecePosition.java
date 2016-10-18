@@ -30,4 +30,10 @@ public interface PiecePosition {
     boolean intersect(PiecePosition another);
     
     boolean intersect(Position pos);
+
+    PiecePosition shiftLevel(byte levelShift);
+
+    PiecePosition shiftRow(byte rowShift);
+
+    PiecePosition shiftColumn(byte columnShift);
 }

@@ -18,9 +18,10 @@ package com.marosj.woodpuzzle.backtracking.lists;
 
 import com.marosj.woodpuzzle.backtracking.PiecePosition;
 import com.marosj.woodpuzzle.backtracking.Position;
+
+import javax.annotation.concurrent.Immutable;
 import java.util.Arrays;
 import java.util.Comparator;
-import javax.annotation.concurrent.Immutable;
 
 /**
  *
@@ -69,6 +70,39 @@ public class PiecePositionListImpl implements PiecePosition {
     public boolean intersect(Position pos) {
         int foundIdx = Arrays.binarySearch(positions, pos, comparator);
         return foundIdx >= 0;
+    }
+
+    @Override
+    public PiecePosition shiftLevel(byte levelShift) {
+        Position[] newPos = new Position[positions.length];
+        int i = 0;
+        for (Position position : positions) {
+            newPos[i] = new Position(position.getLevel() + levelShift, position.getRow(), position.getColumn());
+            i++;
+        }
+        return new PiecePositionListImpl(newPos);
+    }
+
+    @Override
+    public PiecePosition shiftRow(byte rowShift) {
+        Position[] newPos = new Position[positions.length];
+        int i = 0;
+        for (Position position : positions) {
+            newPos[i] = new Position(position.getLevel(), position.getRow() + rowShift, position.getColumn());
+            i++;
+        }
+        return new PiecePositionListImpl(newPos);
+    }
+
+    @Override
+    public PiecePosition shiftColumn(byte columnShift) {
+        Position[] newPos = new Position[positions.length];
+        int i = 0;
+        for (Position position : positions) {
+            newPos[i] = new Position(position.getLevel(), position.getRow(), position.getColumn() + columnShift);
+            i++;
+        }
+        return new PiecePositionListImpl(newPos);
     }
 
     @Override
